@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const tasks = require('./routes/tasks')
 const cors = require('cors');
 let mysql = require('mysql');
 let jwt = require('jsonwebtoken');
@@ -13,6 +14,9 @@ app.use(cors());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+app.use('/api',tasks);
+//DB connection
 
 
 // default route
@@ -34,7 +38,7 @@ var dbConn = mysql.createConnection({
 });
 
 // connect to database
-dbConn.connect();
+//dbConn.connect();
 
 
 // Retrieve all users 
@@ -128,26 +132,8 @@ let handlers = new HandlerGenerator();
 app.post('/api/login', handlers.login);
 
 
-app.get('/home', middleware.checkToken, handlers.index);
+app.get('/api/home', middleware.checkToken, handlers.index);
 
-app.get('/api/home', (req, res) => {
-    const { authorization } = req.headers;
-    if (authorization && authorization.split(' ')[0] === 'Bearer') {
-        jwt.verify(authorization.split(' ')[1], jwtKey, (err) => {
-            if (err) {
-                console.log('jwt incorrect');
-                throw err;
-            } else {
-                console.log('jwt correct');
-                res.send('curUser');
-            }
-        });
-    } else {
-        console.log('no authorization');
-        res.send('no');
-    }
-}
-)
 
 //  Update user with id
 app.put('/user', function (req, res) {
