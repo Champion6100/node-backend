@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 //const tasks = require('./routes/tasks')
 const cors = require('cors');
+const port = precess.env.PORT || 3000;
 let mysql = require('mysql');
 let jwt = require('jsonwebtoken');
 let config = require('./config');
@@ -31,10 +32,10 @@ app.get('/api', (req, res) => {
 
 // connection configurations
 var dbConn = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'db'
+    host: 'sql7.freemysqlhosting.net',
+    user: 'sql7309966',
+    password: 'tt891eJYjD',
+    database: 'sql7309966'
 });
 
 // connect to database
@@ -169,7 +170,6 @@ app.delete('/delete', function (req, res) {
 });
 
 // set port
-app.listen(3000, function () {
-    console.log(' app is running on port 3000');
-});
-
+server.listen(PORT, () => {
+    console.log(`Server running on ${PORT}/`);
+  });
