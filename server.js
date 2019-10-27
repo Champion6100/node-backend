@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const tasks = require('./routes/tasks')
+//const tasks = require('./routes/tasks')
 const cors = require('cors');
 let mysql = require('mysql');
 let jwt = require('jsonwebtoken');
@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use('/api',tasks);
+//app.use('/api',tasks);
 //DB connection
 
 
@@ -38,7 +38,7 @@ var dbConn = mysql.createConnection({
 });
 
 // connect to database
-//dbConn.connect();
+dbConn.connect();
 
 
 // Retrieve all users 
