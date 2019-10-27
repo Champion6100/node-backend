@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 //const tasks = require('./routes/tasks')
 const cors = require('cors');
-const port = precess.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 let mysql = require('mysql');
 let jwt = require('jsonwebtoken');
 let config = require('./config');
@@ -119,9 +119,9 @@ class HandlerGenerator {
             });
         }
     }
-    index (req, res) {
+    index(req, res) {
         res.json({
-            success:true,
+            success: true,
             message: 'Index page'
         });
     }
@@ -170,6 +170,6 @@ app.delete('/delete', function (req, res) {
 });
 
 // set port
-server.listen(PORT, () => {
-    console.log(`Server running on ${PORT}/`);
-  });
+app.listen(port, () => {
+    console.log(`Server running on ${port}/`);
+});
